@@ -1,4 +1,4 @@
-import client  from "@/redisHelper";
+
 
 export default async function handler(req, res) {
   const { method, body } = req;
@@ -17,8 +17,6 @@ export default async function handler(req, res) {
           
         res.status(200).send();
         break;
-
-        
     }
     default: {
       res.status(405).end(`Method Not Allowed`);
