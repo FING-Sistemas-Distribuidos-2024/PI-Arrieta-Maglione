@@ -1,20 +1,20 @@
 import { useEffect, useState } from 'react';
 import Survey from '@/components/survey';
 import { getInitialStatus } from '@/services';
-import {baseUrl} from '@/constants';
+import { baseUrl } from '@/constants';
 import io from 'socket.io-client';
 
 export default function Home() {
   const [options, setOptions] = useState([]);
-  
-  
+
+
   const getStatus = async () => {
-    const options = await getInitialStatus(); 
+    const options = await getInitialStatus();
     options && setOptions(options)
   }
 
   const addOption = async (option) => {
-    setOptions(prevOptions => [...prevOptions, {team: option, votes: 0}]);
+    setOptions(prevOptions => [...prevOptions, { team: option, votes: 0 }]);
   }
 
   const removeOption = async (option) => {
@@ -35,8 +35,9 @@ export default function Home() {
   useEffect(() => {
     getStatus()
 
-    const socket = new WebSocket('ws://localhost:8080/status');
-    
+    const urlWithoutMethod = baseUrl.replace(/(^\w+:|^)\/\//, '');
+    const socket = new WebSocket(`ws://${urlWithoutMethod}/status`);
+
     socket.onmessage = (event) => {
       const { team, operation } = JSON.parse(event.data);
       if (operation === 'create') {
@@ -60,7 +61,7 @@ export default function Home() {
       socket.close();
     };
 
-  },[])
+  }, [])
   return (
     <Survey options={options} />
   );
