@@ -23,7 +23,7 @@ func New(port string) (*Server, error) {
 		redis.NewClient(
 			&redis.Options{
 				Addr:     os.Getenv("REDIS_ADDR"),
-				Password: os.Getenv("REDIS_PASSWORD"),
+				Password: "",
 			},
 		),
 		"status")}
