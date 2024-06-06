@@ -26,7 +26,7 @@ func New(port string) (*Server, error) {
 				Password: os.Getenv("REDIS_PASSWORD"),
 			},
 		),
-		"votes")}
+		"status")}
 
 	r.Mount("/", appRouter.Routes())
 

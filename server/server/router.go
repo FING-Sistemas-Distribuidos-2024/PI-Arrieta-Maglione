@@ -2,6 +2,7 @@ package server
 
 import (
 	"encoding/json"
+	"log"
 	"net/http"
 	"strconv"
 
@@ -13,7 +14,11 @@ import (
 	"github.com/gorilla/websocket"
 )
 
-var upgrader = websocket.Upgrader{}
+var upgrader = websocket.Upgrader{
+	CheckOrigin: func(r *http.Request) bool {
+		return true
+	},
+}
 
 type Router struct {
 	rbd *redisHelper.RedisHelper
@@ -138,25 +143,51 @@ func (rt *Router) DeleteTeam(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNoContent)
 }
 
+var clients = make([]*websocket.Conn, 0) // Slice to store all active connections
+
 func (rt *Router) Status(w http.ResponseWriter, r *http.Request) {
 	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
+		log.Printf("Error upgrading WebSocket: %v", err)
 		return
 	}
 	defer conn.Close()
 
+	// Add the new connection to the list of clients
+	clients = append(clients, conn)
+	defer func() {
+		// Remove the connection when it's closed
+		clients = removeConn(clients, conn)
+	}()
+
 	ch := rt.rbd.Sub.Channel()
 	for msg := range ch {
-		// Send messages read from redis
-		err := conn.WriteMessage(websocket.TextMessage, []byte(msg.Payload))
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
-			return
+		broadcastMessage(clients, msg.Payload)
+	}
+}
+
+func broadcastMessage(clients []*websocket.Conn, message string) {
+	for _, conn := range clients {
+		if err := conn.WriteMessage(websocket.TextMessage, []byte(message)); err != nil {
+			log.Printf("Failed to send message: %v", err)
+			// Remove the failed connection if necessary
 		}
 	}
 }
 
+func removeConn(clients []*websocket.Conn, conn *websocket.Conn) []*websocket.Conn {
+	index := -1
+	for i, c := range clients {
+		if c == conn {
+			index = i
+			break
+		}
+	}
+	if index != -1 {
+		return append(clients[:index], clients[index+1:]...)
+	}
+	return clients
+}
 func (rt *Router) Routes() http.Handler {
 	r := chi.NewRouter()
 

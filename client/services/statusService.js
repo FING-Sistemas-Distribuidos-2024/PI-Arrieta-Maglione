@@ -1,8 +1,7 @@
 import { baseUrl } from "@/constants";
 
 const getInitialStatus = async () => {
-    const url = `${baseUrl}/votes`;
-    console.log(url)
+    const url = `api/status`;
     try {
         const res = await fetch(url, {
             method: 'get',
@@ -18,4 +17,4 @@ const getInitialStatus = async () => {
     }
 }
 
-export {getInitialStatus};
+export { getInitialStatus };

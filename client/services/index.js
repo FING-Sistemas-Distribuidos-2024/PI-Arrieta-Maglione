@@ -1,4 +1,4 @@
-import {vote, addOption} from "./voteService";
+import {vote, addOption, deleteTeam} from "./voteService";
 import {getInitialStatus} from "./statusService";
 
-export { vote, getInitialStatus, addOption };
+export { vote, getInitialStatus, addOption, deleteTeam };
