@@ -1,24 +1,20 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Survey from '../components/Survey';
+import { getInitialStatus } from '@/services';
 
 export default function Home() {
-  useEffect(
-    () => getStatus()
+  const [options, setOptions] = useState([]);
+
+  const getStatus = async () => {
+      const options = await getInitialStatus(); 
+      options && setOptions(options)
+  }
+
+  useEffect(() => {
+    getStatus()
+  }
   ,[])
   return (
-    <Survey />
+    <Survey options={options} />
   );
-}
-
-const getStatus = () => {
-  fetch('/api/status', {
-    method: 'GET',
-    headers: {
-    'Content-Type': 'application/json'
-    }
-  }).then(async (res) => {
-      if (res.status != 200) alert("Error: " + res.status)
-  }).catch((err) => { 
-      alert('Error:' + err);
-  });
 }
