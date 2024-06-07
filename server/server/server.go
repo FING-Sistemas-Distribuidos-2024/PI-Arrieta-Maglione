@@ -23,7 +23,7 @@ func New(port string) (*Server, error) {
 	appRouter := Router{rbd: redisHelper.NewRedisHelper(
 		redis.NewClient(
 			&redis.Options{
-				Addr:     os.Getenv("REDIS_ADDR") + "6379",
+				Addr:     os.Getenv("REDIS_ADDR") + ":6379",
 				Password: os.Getenv("REDIS_PASSWORD"),
 			},
 		),
