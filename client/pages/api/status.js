@@ -1,4 +1,4 @@
-import { baseUrl } from "@/constants"
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
 export default async function handler(req, res) {
     try {
@@ -10,7 +10,6 @@ export default async function handler(req, res) {
         if (!response.ok) {
             throw new Error(`Failed to fetch data: ${response.status}`);
         }
-
         const data = await response.json();
         res.status(200).json(data);
     } catch (error) {

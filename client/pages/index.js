@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react';
 import Survey from '@/components/survey';
 import { getInitialStatus } from '@/services';
-import { baseUrl } from '@/constants';
-import io from 'socket.io-client';
+// import { baseUrl } from '@/constants';
 
 export default function Home() {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+  console.log("La url es", `ws://${process.env.NEXT_PUBLIC_WS_URL}/status`)
   const [options, setOptions] = useState([]);
 
 
   const getStatus = async () => {
     const options = await getInitialStatus();
+    console.log(options)
     options && setOptions(options)
   }
 
@@ -35,8 +37,7 @@ export default function Home() {
   useEffect(() => {
     getStatus()
 
-    const urlWithoutMethod = baseUrl.replace(/(^\w+:|^)\/\//, '');
-    const socket = new WebSocket(`ws://${urlWithoutMethod}/status`);
+    const socket = new WebSocket(`ws://${process.env.NEXT_PUBLIC_WS_URL}/status`);
 
     socket.onmessage = (event) => {
       const { team, operation } = JSON.parse(event.data);

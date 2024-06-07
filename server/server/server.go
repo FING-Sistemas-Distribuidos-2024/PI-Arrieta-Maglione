@@ -19,11 +19,12 @@ type Server struct {
 func New(port string) (*Server, error) {
 	r := chi.NewRouter()
 
+	log.Printf("Conectando a redis en %s", os.Getenv("REDIS_ADDR"))
 	appRouter := Router{rbd: redisHelper.NewRedisHelper(
 		redis.NewClient(
 			&redis.Options{
-				Addr:     os.Getenv("REDIS_ADDR"),
-				Password: "",
+				Addr:     os.Getenv("REDIS_ADDR") + "6379",
+				Password: os.Getenv("REDIS_PASSWORD"),
 			},
 		),
 		"status")}

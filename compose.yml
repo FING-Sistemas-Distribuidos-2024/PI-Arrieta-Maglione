@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  server:
+    build: "./server"
+    env_file: ./server/.env
+    environment:
+      - REDIS_ADDR=redis:6379
+    ports:
+      - "8080:8080"
+    networks:
+      - test-network
+  
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
+    networks:
+      - test-network
+
+
+networks:
+  test-network:
+    driver: bridge
+

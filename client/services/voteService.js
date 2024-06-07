@@ -1,7 +1,5 @@
-import { baseUrl } from "@/constants";
-
 const vote = async (team) => {
-    const url = patchUrl(`api/vote?teamId=${team}`);
+    const url = patchUrl(`/api/vote?teamId=${team}`);
     try {
         const { ok, data } = await fetch(url, {
             method: 'POST',
@@ -15,7 +13,7 @@ const vote = async (team) => {
 }
 
 const addOption = async (option) => {
-    const url = patchUrl(`api/addOption?teamId=${option}`);
+    const url = patchUrl(`/api/addOption?teamId=${option}`);
     try {
         const response = await fetch(url, {
             method: 'POST',

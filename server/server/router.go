@@ -146,6 +146,7 @@ func (rt *Router) DeleteTeam(w http.ResponseWriter, r *http.Request) {
 var clients = make([]*websocket.Conn, 0) // Slice to store all active connections
 
 func (rt *Router) Status(w http.ResponseWriter, r *http.Request) {
+	log.Println("Asking for status")
 	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		log.Printf("Error upgrading WebSocket: %v", err)

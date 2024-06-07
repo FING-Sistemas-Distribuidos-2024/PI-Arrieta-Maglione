@@ -1,7 +1,5 @@
-import { baseUrl } from "@/constants";
-
 const getInitialStatus = async () => {
-    const url = `api/status`;
+    const url = `/api/status`;
     try {
         const res = await fetch(url, {
             method: 'get',
