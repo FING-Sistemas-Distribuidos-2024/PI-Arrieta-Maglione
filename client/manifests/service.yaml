@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - name: client
-        image: amaglione/client-test:latest
+        image: amaglione/client:latest
         ports:
         - containerPort: 3000
         env:
