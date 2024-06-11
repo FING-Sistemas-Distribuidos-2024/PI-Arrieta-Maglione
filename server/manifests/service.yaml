@@ -28,14 +28,12 @@ spec:
     spec:
       containers:
       - name: server
-        image: amaglione/server:latest
+        image: amaglione/server-test:latest
         ports:
         - containerPort: 8080
         env:
         - name: REDIS_ADDR
-          value: "10.43.34.4"
-        - name: REDIS_PASSWORD
-          value: "yMaMgviNcX"
+          value: "redis_master"
         - name: PORT
           value: "8080"
 
