@@ -1,4 +1,4 @@
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+const baseUrl = `http://${process.env.BASE_URL}`;
 
 export default async function handler(req, res) {
     const teamId = req.query.teamId;

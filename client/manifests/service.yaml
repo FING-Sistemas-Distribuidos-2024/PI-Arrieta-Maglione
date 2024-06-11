@@ -30,3 +30,9 @@ spec:
         image: amaglione/client:latest
         ports:
         - containerPort: 3000
+        env:
+        - name: BASE_URL
+          value: "server"
+        - name: WS_URL
+        # Replace value for WS_URL with the LoadBalancer IP of the server service
+          value: "localhost:8081"
