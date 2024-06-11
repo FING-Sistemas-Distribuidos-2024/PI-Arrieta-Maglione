@@ -41,6 +41,6 @@ kubectl apply -f manifests/service.yaml
 Luego, el front-end debería estar accesible en la IP que le asigne el LoadBalancer.
 
 ### Información extra
-La aplicación se encuentra desplegada con una IP pública para la VPN de la cátedra. La misma está accesible (al momento de la creación de este readme) en la siguiente dirección: [http://10.230.110.13](http://10.230.110.13).
+La aplicación se encuentra desplegada con una IP pública para la VPN de la cátedra. La misma está accesible (al momento de la creación de este readme) en la siguiente dirección: [http://10.230.110.14](http://10.230.110.14).
 
 Además de los despliegues para Kubernetes, en la raíz del proyecto se puede encontrar un archivo `compose.yml` que permite levantar la aplicación usando Docker Compose.
