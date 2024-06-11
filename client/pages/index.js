@@ -4,8 +4,6 @@ import { getInitialStatus } from '@/services';
 // import { baseUrl } from '@/constants';
 
 export default function Home() {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-  console.log("La url es", `ws://${process.env.NEXT_PUBLIC_WS_URL}/status`)
   const [options, setOptions] = useState([]);
 
 
@@ -13,6 +11,12 @@ export default function Home() {
     const options = await getInitialStatus();
     console.log(options)
     options && setOptions(options)
+  }
+
+  const getWsUrl = async () => {
+    const response = await fetch('/api/getWsUrl');
+    const { wsUrl } = await response.json();
+    return wsUrl;
   }
 
   const addOption = async (option) => {
@@ -34,10 +38,11 @@ export default function Home() {
     });
   }
 
-  useEffect(() => {
+  useEffect(async () => {
     getStatus()
 
-    const socket = new WebSocket(`ws://${process.env.NEXT_PUBLIC_WS_URL}/status`);
+    const wsUrl = await getWsUrl();
+    const socket = new WebSocket(`ws://${wsUrl}/status`);
 
     socket.onmessage = (event) => {
       const { team, operation } = JSON.parse(event.data);
