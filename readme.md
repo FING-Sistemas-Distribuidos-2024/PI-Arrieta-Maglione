@@ -33,7 +33,7 @@ helm install redis bitnami/redis
 kubectl apply -f manifests/service.yaml
 ```
 
-3. Desplegar el front-end desde el directorio `/client`. Antess de ejecutar el comando, se debe modificar la variable de entorno `WS_URL` por la IP ública del servidor:
+3. Desplegar el front-end desde el directorio `/client`. Antes de ejecutar el comando, se debe modificar la variable de entorno `WS_URL` por la IP pública del servidor:
 ```bash
 kubectl apply -f manifests/service.yaml
 ```
