@@ -33,9 +33,9 @@ spec:
         - containerPort: 8080
         env:
         - name: REDIS_ADDR
-          value: "10.102.61.76"
+          value: "redis-master"
         - name: REDIS_PASSWORD
-          value: "kN5zu183AA"
-        - name: PORT
-          value: "8080"
-
+          valueFrom:
+            secretKeyRef:
+              name: redis
+              key: redis-password
