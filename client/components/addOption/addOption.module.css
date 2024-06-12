@@ -1,0 +1,30 @@
+.block {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+}
+
+.input {
+    padding: 10px;
+    background: none;
+}
+
+.input:focus {
+    outline: none;
+}
+
+.send {
+    padding: 10px;
+    background: #0070f3;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.send:hover {
+    background: #0053b3;
+}
