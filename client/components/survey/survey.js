@@ -19,9 +19,9 @@ const Survey = ({ options }) => {
     }
 
     return (
-        <div>
-            <h1>Survey</h1>
-            <h2>Vote for an option or add a new one</h2>
+        <div className={styles.parentContainer}>
+            <h1 className={styles.title}>Survey</h1>
+            <h2 className={styles.subtitle}>Vote for an option or add a new one</h2>
             <div className={styles.container}>
                 {options.map((option, index) => (
                     <SurveyOption key={index} option={option.team} votes={option.votes} />

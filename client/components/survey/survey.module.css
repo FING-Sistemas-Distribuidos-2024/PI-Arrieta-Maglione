@@ -1,7 +1,27 @@
+.parentContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: space-between;
+    gap: 20px;
+}
+
 .container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     border-top: 1px solid #e0e0e0;
+    margin: 10px 0;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 20px 0;
+}
+
+.subtitle {
+    font-size: 18px;
+    font-weight: 400;
     margin: 10px 0;
 }
