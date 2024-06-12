@@ -46,5 +46,5 @@ La aplicación se encuentra desplegada con una IP pública para la VPN de la cá
 Además de los despliegues para Kubernetes, en la raíz del proyecto se puede encontrar un archivo `compose.yml` que permite levantar la aplicación usando Docker Compose.
 
 ### Demo
-[Screencast from 2024-06-11 15-19-13.webm](https://github.com/FING-Sistemas-Distribuidos-2024/PI-Arrieta-Maglione/assets/89352332/779750e2-8e7f-4228-9e5f-be32e6a8d314)
+[Screencast from 2024-06-11 22-05-59.webm](https://github.com/FING-Sistemas-Distribuidos-2024/PI-Arrieta-Maglione/assets/89352332/c6a6f6c1-3bb6-4376-8187-8354e2a9f1a5)
 
